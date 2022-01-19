@@ -1,0 +1,162 @@
+li{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+}  
+
+nav{
+  width: 100vw;
+}
+nav{
+  width: 100vw;
+  background-color: #b67e06e0;
+}
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  margin: 0;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  
+  /*this option by default dispose the elements in a row (flex-direction: row)*/
+  display: flex;
+}
+
+li{
+  list-style-type: none;  
+  
+  /*when I specify 2 values to margin, the first one is for the top and bottom side, the second for the left and right side*/
+  margin: 0 3vw;
+}
+
+li{
+  list-style-type: none;  
+  margin: 0 2vw;
+  /* our font-size will be 3% of the height of the viewport */
+  font-size: 2vh;
+}
+a{
+  text-decoration: none;
+  
+  /*below I changed the color*/
+  color: rgb(255, 255, 255);
+  /*I added some padding*/
+  padding: 1vw;
+  /*also changed the font family but that's totally irrelevant*/
+  font-family: monospace;
+}
+a:hover{
+  background-color: #815a05;
+}
+/*change the layout of the navigation bar for all the screens 
+that have a width less or equal than 500px*/
+
+@media only screen and (max-width: 500px) {
+  /*shows elements in a column*/
+  ul{
+    flex-direction: column;
+  }
+  
+  /* deletes margin on top or bottom of the a tag*/
+  li{
+    margin: 0;
+  }
+ /* makes sure that the a tag will take the entire screen*/
+  a{
+    display: block;
+  }
+}
+
+/* Three column layout */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  width: 100%;
+  max-width: 80em;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Inside one column, lay out all items in column direction */
+.column {
+  --column-offset: 10vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--column-offset) 0;
+}
+
+/* Limit site of the images */
+.column__item-imgwrap img {
+  border-radius: 1em;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 0.75;
+  object-fit: cover;
+}
+
+.column__item-caption {
+  text-align: center;
+}
+
+/* Scroll-Timeline Supported, Yay! */
+@supports (animation-timeline: works) {
+   /* As we're about to shift content out of .columns, we need it to hide its overflow */
+  .columns {
+      overflow-y: hidden;
+  }
+
+  .column-reverse {
+      /* Flip item order in reverse columns */
+      flex-direction: column-reverse;
+  }
+
+  /* Set up Animation */
+  @keyframes adjust-position {
+      /* Start position: shift entire column up, but not so that it goes out of view */
+      from {
+          transform: translateY(calc(-100% + 100vh));
+      }
+      /* End position: shift entire column down, but not so that it goes out of view */
+      to {
+          transform: translateY(calc(100% - 100vh));
+      }
+  }
+
+  /* Set up scroll-timeline */
+  @scroll-timeline scroll-in-document {
+      source: auto; /* Default scroll-timeline: scrolling in the document */
+  }
+
+  /* Hook our animation with the timeline to our columns */
+  .column-reverse {
+      animation: 1s adjust-position linear forwards;
+      animation-timeline: scroll-in-document;
+  }
+}
+
+/* general styles */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+}
